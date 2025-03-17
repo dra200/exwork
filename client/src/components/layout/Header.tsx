@@ -1,44 +1,30 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Link, useLocation } from 'wouter';
 import { Button } from '@/components/ui/button';
-import { useScrollSpy } from '@/hooks/use-scroll-spy';
-import { SECTION_IDS, COLORS } from '@/lib/constants';
-import { Menu, X, User } from 'lucide-react';
+import { SECTION_IDS } from '@/lib/constants';
+import { Menu, X, User, ChevronDown, ChevronUp } from 'lucide-react';
 import { motion } from 'framer-motion';
 
-export function Header() {
-  const [isScrolled, setIsScrolled] = useState(false);
+type SectionType = 'hero' | 'about' | 'services' | 'testimonials' | 'cta' | 'contact';
+
+interface HeaderProps {
+  activeSection?: SectionType;
+  onNavigate?: (section: SectionType) => void;
+}
+
+export function Header({ activeSection = 'hero', onNavigate }: HeaderProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const activeSection = useScrollSpy({ offset: 70 });
   const [location] = useLocation();
 
   // Check if we're on the admin page
   const isAdminPage = location === '/admin';
 
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 10) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
-
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      window.scrollTo({
-        top: element.offsetTop - 70,
-        behavior: 'smooth'
-      });
+  // Function to navigate to sections in the new Apple-style fixed layout
+  const navigateToSection = (section: SectionType) => {
+    if (onNavigate) {
+      onNavigate(section);
+      setIsMobileMenuOpen(false);
     }
-    setIsMobileMenuOpen(false);
   };
 
   if (isAdminPage) {
@@ -63,54 +49,89 @@ export function Header() {
   }
 
   return (
-    <header className={`fixed w-full top-0 z-50 transition-all duration-300 ${isScrolled ? 'shadow-md' : ''}`}>
-      <div className="bg-black bg-opacity-90 backdrop-blur-lg border-b border-zinc-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
+    <header className="fixed w-full top-0 z-50 transition-all duration-300">
+      <div className="bg-black bg-opacity-95 backdrop-blur-lg">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <div className="flex justify-between items-center h-20">
             {/* Logo */}
             <div className="flex items-center">
-              <Link href="/" className="text-2xl font-bold text-white flex items-center">
+              <button 
+                onClick={() => navigateToSection('hero')}
+                className="text-3xl font-bold text-white flex items-center tracking-tight"
+              >
                 <span className="text-primary mr-1">Ex</span>Work<span className="text-primary">.</span>
                 <span className="text-sm">eu</span>
-              </Link>
+              </button>
             </div>
 
             {/* Desktop Nav */}
-            <nav className="hidden md:flex space-x-8">
+            <nav className="hidden md:flex space-x-10">
               <button 
-                onClick={() => scrollToSection(SECTION_IDS.about)} 
-                className={`${activeSection === SECTION_IDS.about ? 'text-primary' : 'text-gray-300'} hover:text-primary font-medium text-sm transition duration-150`}
+                onClick={() => navigateToSection('about')} 
+                className={`${activeSection === 'about' ? 'text-primary font-semibold' : 'text-gray-300'} hover:text-primary text-sm transition duration-150`}
               >
                 About
               </button>
               <button 
-                onClick={() => scrollToSection(SECTION_IDS.services)} 
-                className={`${activeSection === SECTION_IDS.services ? 'text-primary' : 'text-gray-300'} hover:text-primary font-medium text-sm transition duration-150`}
+                onClick={() => navigateToSection('services')} 
+                className={`${activeSection === 'services' ? 'text-primary font-semibold' : 'text-gray-300'} hover:text-primary text-sm transition duration-150`}
               >
                 Services
               </button>
               <button 
-                onClick={() => scrollToSection(SECTION_IDS.testimonials)} 
-                className={`${activeSection === SECTION_IDS.testimonials ? 'text-primary' : 'text-gray-300'} hover:text-primary font-medium text-sm transition duration-150`}
+                onClick={() => navigateToSection('testimonials')} 
+                className={`${activeSection === 'testimonials' ? 'text-primary font-semibold' : 'text-gray-300'} hover:text-primary text-sm transition duration-150`}
               >
                 Testimonials
               </button>
               <Link href="/admin">
                 <Button 
                   variant="outline"
-                  className="text-white border-zinc-700 hover:bg-zinc-800 mr-4"
+                  className="text-white border-zinc-700 hover:bg-zinc-800"
                 >
                   <User className="h-4 w-4 mr-2" />
                   Admin
                 </Button>
               </Link>
               <Button 
-                onClick={() => scrollToSection(SECTION_IDS.contact)} 
+                onClick={() => navigateToSection('contact')} 
                 className="apple-button"
               >
                 Contact Us
               </Button>
             </nav>
+
+            {/* Navigation arrows */}
+            <div className="hidden md:flex items-center space-x-2 absolute right-4 bottom-4">
+              <Button 
+                variant="ghost" 
+                size="icon" 
+                className="rounded-full bg-zinc-800/50 text-white hover:bg-zinc-700"
+                onClick={() => {
+                  const sectionOrder: SectionType[] = ['hero', 'about', 'services', 'testimonials', 'cta', 'contact'];
+                  const currentIndex = sectionOrder.indexOf(activeSection);
+                  if (currentIndex > 0 && onNavigate) {
+                    onNavigate(sectionOrder[currentIndex - 1]);
+                  }
+                }}
+              >
+                <ChevronUp className="h-5 w-5" />
+              </Button>
+              <Button 
+                variant="ghost" 
+                size="icon" 
+                className="rounded-full bg-zinc-800/50 text-white hover:bg-zinc-700"
+                onClick={() => {
+                  const sectionOrder: SectionType[] = ['hero', 'about', 'services', 'testimonials', 'cta', 'contact'];
+                  const currentIndex = sectionOrder.indexOf(activeSection);
+                  if (currentIndex < sectionOrder.length - 1 && onNavigate) {
+                    onNavigate(sectionOrder[currentIndex + 1]);
+                  }
+                }}
+              >
+                <ChevronDown className="h-5 w-5" />
+              </Button>
+            </div>
 
             {/* Mobile menu button */}
             <div className="md:hidden flex items-center gap-2">
@@ -143,7 +164,7 @@ export function Header() {
 
       {/* Mobile menu */}
       <motion.div 
-        className={`md:hidden bg-zinc-900 shadow-lg absolute w-full border-b border-zinc-800`}
+        className={`md:hidden bg-black/95 shadow-lg absolute w-full backdrop-blur-lg`}
         initial={false}
         animate={{ 
           height: isMobileMenuOpen ? 'auto' : 0,
@@ -152,28 +173,34 @@ export function Header() {
         transition={{ duration: 0.2 }}
         style={{ overflow: 'hidden' }}
       >
-        <div className="px-4 pt-2 pb-4 space-y-1">
+        <div className="px-6 py-4 space-y-2">
           <button 
-            onClick={() => scrollToSection(SECTION_IDS.about)} 
-            className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-primary hover:bg-zinc-800 transition duration-150"
+            onClick={() => navigateToSection('hero')} 
+            className={`block w-full text-left px-4 py-3 rounded-md text-base font-medium ${activeSection === 'hero' ? 'text-primary' : 'text-gray-300'} hover:text-primary hover:bg-zinc-800/50 transition duration-150`}
+          >
+            Home
+          </button>
+          <button 
+            onClick={() => navigateToSection('about')} 
+            className={`block w-full text-left px-4 py-3 rounded-md text-base font-medium ${activeSection === 'about' ? 'text-primary' : 'text-gray-300'} hover:text-primary hover:bg-zinc-800/50 transition duration-150`}
           >
             About
           </button>
           <button 
-            onClick={() => scrollToSection(SECTION_IDS.services)} 
-            className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-primary hover:bg-zinc-800 transition duration-150"
+            onClick={() => navigateToSection('services')} 
+            className={`block w-full text-left px-4 py-3 rounded-md text-base font-medium ${activeSection === 'services' ? 'text-primary' : 'text-gray-300'} hover:text-primary hover:bg-zinc-800/50 transition duration-150`}
           >
             Services
           </button>
           <button 
-            onClick={() => scrollToSection(SECTION_IDS.testimonials)} 
-            className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-primary hover:bg-zinc-800 transition duration-150"
+            onClick={() => navigateToSection('testimonials')} 
+            className={`block w-full text-left px-4 py-3 rounded-md text-base font-medium ${activeSection === 'testimonials' ? 'text-primary' : 'text-gray-300'} hover:text-primary hover:bg-zinc-800/50 transition duration-150`}
           >
             Testimonials
           </button>
           <button 
-            onClick={() => scrollToSection(SECTION_IDS.contact)} 
-            className="block w-full text-left px-3 py-3 rounded-full text-base font-medium bg-primary text-white hover:bg-primary/90 transition duration-150"
+            onClick={() => navigateToSection('contact')} 
+            className="block w-full text-left px-4 py-3 rounded-full text-base font-medium bg-primary text-white hover:bg-primary/90 transition duration-150"
           >
             Contact Us
           </button>
