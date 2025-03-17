@@ -98,8 +98,8 @@ export default function Admin() {
           <Dashboard user={authState.user} onLogout={handleLogout} />
         ) : (
           <div className="container mx-auto px-4 py-12 max-w-md">
-            <div className="bg-white rounded-lg shadow-lg p-6">
-              <h1 className="text-2xl font-bold mb-6 text-center">Admin Login</h1>
+            <div className="bg-zinc-900 rounded-lg shadow-xl p-8 border border-zinc-800">
+              <h1 className="text-2xl font-bold mb-6 text-center text-white">Admin Login</h1>
               <LoginForm onLogin={handleLogin} />
             </div>
           </div>

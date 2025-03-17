@@ -3,7 +3,7 @@ import { Link, useLocation } from 'wouter';
 import { Button } from '@/components/ui/button';
 import { useScrollSpy } from '@/hooks/use-scroll-spy';
 import { SECTION_IDS, COLORS } from '@/lib/constants';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, User } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 export function Header() {
@@ -43,15 +43,18 @@ export function Header() {
 
   if (isAdminPage) {
     return (
-      <header className="fixed w-full top-0 z-50 bg-white border-b border-gray-200 shadow-sm">
+      <header className="fixed w-full top-0 z-50 bg-black border-b border-zinc-800 shadow-lg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            <Link href="/" className="text-2xl font-bold text-primary flex items-center">
-              <span className="text-accent mr-1">Ex</span>Work<span className="text-accent">.</span>
+            <Link href="/" className="text-2xl font-bold text-white flex items-center">
+              <span className="text-primary mr-1">Ex</span>Work<span className="text-primary">.</span>
               <span className="text-sm">eu</span>
             </Link>
             <Link href="/admin">
-              <Button variant="ghost">Admin Dashboard</Button>
+              <Button className="bg-zinc-800 text-white hover:bg-zinc-700 flex items-center gap-2">
+                <User className="h-4 w-4" />
+                Admin Dashboard
+              </Button>
             </Link>
           </div>
         </div>
@@ -61,13 +64,13 @@ export function Header() {
 
   return (
     <header className={`fixed w-full top-0 z-50 transition-all duration-300 ${isScrolled ? 'shadow-md' : ''}`}>
-      <div className="bg-white bg-opacity-80 backdrop-blur-lg border-b border-gray-200">
+      <div className="bg-black bg-opacity-90 backdrop-blur-lg border-b border-zinc-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
             <div className="flex items-center">
-              <Link href="/" className="text-2xl font-bold text-primary flex items-center">
-                <span className="text-accent mr-1">Ex</span>Work<span className="text-accent">.</span>
+              <Link href="/" className="text-2xl font-bold text-white flex items-center">
+                <span className="text-primary mr-1">Ex</span>Work<span className="text-primary">.</span>
                 <span className="text-sm">eu</span>
               </Link>
             </div>
@@ -76,36 +79,54 @@ export function Header() {
             <nav className="hidden md:flex space-x-8">
               <button 
                 onClick={() => scrollToSection(SECTION_IDS.about)} 
-                className={`${activeSection === SECTION_IDS.about ? 'text-primary' : 'text-text-main'} hover:text-primary font-medium text-sm transition duration-150`}
+                className={`${activeSection === SECTION_IDS.about ? 'text-primary' : 'text-gray-300'} hover:text-primary font-medium text-sm transition duration-150`}
               >
                 About
               </button>
               <button 
                 onClick={() => scrollToSection(SECTION_IDS.services)} 
-                className={`${activeSection === SECTION_IDS.services ? 'text-primary' : 'text-text-main'} hover:text-primary font-medium text-sm transition duration-150`}
+                className={`${activeSection === SECTION_IDS.services ? 'text-primary' : 'text-gray-300'} hover:text-primary font-medium text-sm transition duration-150`}
               >
                 Services
               </button>
               <button 
                 onClick={() => scrollToSection(SECTION_IDS.testimonials)} 
-                className={`${activeSection === SECTION_IDS.testimonials ? 'text-primary' : 'text-text-main'} hover:text-primary font-medium text-sm transition duration-150`}
+                className={`${activeSection === SECTION_IDS.testimonials ? 'text-primary' : 'text-gray-300'} hover:text-primary font-medium text-sm transition duration-150`}
               >
                 Testimonials
               </button>
+              <Link href="/admin">
+                <Button 
+                  variant="outline"
+                  className="text-white border-zinc-700 hover:bg-zinc-800 mr-4"
+                >
+                  <User className="h-4 w-4 mr-2" />
+                  Admin
+                </Button>
+              </Link>
               <Button 
                 onClick={() => scrollToSection(SECTION_IDS.contact)} 
-                variant={activeSection === SECTION_IDS.contact ? 'default' : 'default'}
-                className="text-white bg-primary hover:bg-primary/90"
+                className="apple-button"
               >
                 Contact Us
               </Button>
             </nav>
 
             {/* Mobile menu button */}
-            <div className="md:hidden flex items-center">
+            <div className="md:hidden flex items-center gap-2">
+              <Link href="/admin">
+                <Button 
+                  variant="outline"
+                  size="sm"
+                  className="text-white border-zinc-700 hover:bg-zinc-800"
+                >
+                  <User className="h-4 w-4" />
+                </Button>
+              </Link>
               <Button 
                 variant="ghost" 
                 size="icon" 
+                className="text-white"
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 aria-label="Toggle menu"
               >
@@ -122,7 +143,7 @@ export function Header() {
 
       {/* Mobile menu */}
       <motion.div 
-        className={`md:hidden bg-white shadow-lg absolute w-full`}
+        className={`md:hidden bg-zinc-900 shadow-lg absolute w-full border-b border-zinc-800`}
         initial={false}
         animate={{ 
           height: isMobileMenuOpen ? 'auto' : 0,
@@ -134,25 +155,25 @@ export function Header() {
         <div className="px-4 pt-2 pb-4 space-y-1">
           <button 
             onClick={() => scrollToSection(SECTION_IDS.about)} 
-            className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-text-main hover:text-primary hover:bg-neutral transition duration-150"
+            className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-primary hover:bg-zinc-800 transition duration-150"
           >
             About
           </button>
           <button 
             onClick={() => scrollToSection(SECTION_IDS.services)} 
-            className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-text-main hover:text-primary hover:bg-neutral transition duration-150"
+            className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-primary hover:bg-zinc-800 transition duration-150"
           >
             Services
           </button>
           <button 
             onClick={() => scrollToSection(SECTION_IDS.testimonials)} 
-            className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-text-main hover:text-primary hover:bg-neutral transition duration-150"
+            className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-primary hover:bg-zinc-800 transition duration-150"
           >
             Testimonials
           </button>
           <button 
             onClick={() => scrollToSection(SECTION_IDS.contact)} 
-            className="block w-full text-left px-3 py-2 rounded-md text-base font-medium bg-primary text-white hover:bg-primary/90 transition duration-150"
+            className="block w-full text-left px-3 py-3 rounded-full text-base font-medium bg-primary text-white hover:bg-primary/90 transition duration-150"
           >
             Contact Us
           </button>

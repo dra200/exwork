@@ -8,6 +8,24 @@
   }
 
   body {
-    @apply font-sans antialiased bg-background text-foreground;
+    @apply font-sans antialiased bg-black text-white;
+  }
+  
+  /* Apple-inspired styles */
+  .apple-section {
+    @apply bg-black text-white;
+  }
+  
+  .apple-heading {
+    @apply font-semibold tracking-tight;
+  }
+  
+  .apple-button {
+    @apply bg-primary hover:bg-primary/90 text-white rounded-full px-6 py-3 
+           font-medium transition-all duration-300;
+  }
+  
+  .apple-card {
+    @apply bg-zinc-900 border-none shadow-xl;
   }
 }
