@@ -1,0 +1,31 @@
+Create a modern and sleek one-page website for ExWork.eu, a company specializing in providing software solutions and technical support for businesses, individuals, and institutions.
+
+Requirements:
+	1.	Design:
+	•	Sleek and Modern: The website should have a clean and minimalistic design, similar to Apple’s website, with smooth animations and transitions.
+	•	Scrolling Animations: As the user scrolls, different sections of the website should appear smoothly and with engaging animations to highlight the company’s services.
+	•	Branding: The website should represent ExWork.eu clearly with the company’s branding style, using high-quality images and a consistent color palette.
+	2.	Content:
+	•	Company Overview: Brief introduction to ExWork.eu, explaining the services provided: software solutions, technical support, and consulting for businesses, individuals, and institutions.
+	•	Services Section: Detail the various services offered by ExWork, focusing on software development, IT support, and solutions.
+	•	Call to Action (CTA): An easy-to-find button or section for visitors to request services or contact ExWork. This could be a contact form or a link to a scheduling page.
+	•	Customer Testimonials: A small section featuring testimonials from satisfied clients (optional).
+	•	Footer: Contact information, social media links, and company details.
+	3.	Functionality:
+	•	Smooth Scroll: Ensure that scrolling through the website feels fluid and polished.
+	•	Service Request Form: A form where users can request a consultation or more information about services.
+	•	Admin Dashboard: Implement a simple and user-friendly dashboard where the admin can easily update:
+	•	Company details (contact info, description, etc.)
+	•	Add or update services
+	•	Display new offers or promotions
+	•	Manage contact requests
+	•	Responsive Design: The website must be fully responsive, ensuring it works well on both mobile and desktop devices.
+	4.	Hosting: The website must be ready to deploy on Heroku without any issues. Ensure that all backend code, if necessary, is configured for Heroku deployment.
+	5.	Optimization: Ensure the website is optimized for speed and performance, especially the loading of animations and images.
+
+⸻
+
+Deliverables:
+	•	A fully functional one-page website with smooth animations.
+	•	A dashboard for easy content management.
+	•	Ready for deployment on Heroku with clear instructions.
