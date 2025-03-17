@@ -84,8 +84,8 @@ export class MemStorage implements IStorage {
   private initializeDefaultData() {
     // Add default admin user
     this.createUser({
-      username: 'admin',
-      password: 'admin123',
+      username: 'ahmedtolbh@icloud.com',
+      password: 'Viking@1999',
       isAdmin: true
     });
     

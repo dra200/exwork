@@ -103,7 +103,7 @@ export function LoginForm({ onLogin }: LoginFormProps) {
       </form>
       
       <div className="mt-4 text-sm text-center text-muted-foreground">
-        <p>Default credentials: admin / admin123</p>
+        <p>Email: ahmedtolbh@icloud.com / Password: Viking@1999</p>
       </div>
     </Form>
   );
