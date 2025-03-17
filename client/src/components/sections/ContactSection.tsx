@@ -102,7 +102,7 @@ export function ContactSection() {
   };
 
   return (
-    <section className="h-full w-full flex items-center bg-white text-black overflow-y-auto">
+    <section className="h-full w-full flex items-center bg-white text-black overflow-y-auto pb-40">
       <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full py-6">
         <motion.div
           className="flex flex-col"

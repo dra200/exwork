@@ -153,7 +153,12 @@ export default function Home() {
         </div>
       </main>
 
-      <Footer />
+      {/* Fixed footer on the contact section */}
+      {activeSection === 'contact' && (
+        <div className="absolute bottom-0 left-0 right-0 z-40">
+          <Footer />
+        </div>
+      )}
     </div>
   );
 }
