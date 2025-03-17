@@ -120,7 +120,7 @@ export default function Home() {
   };
 
   return (
-    <div className="fixed inset-0 flex flex-col h-screen bg-black text-white overflow-hidden">
+    <div className="fixed inset-0 flex flex-col h-screen bg-white text-black overflow-hidden">
       <Header activeSection={activeSection} onNavigate={goToSection} />
       
       <main className="flex-grow relative">
@@ -139,13 +139,13 @@ export default function Home() {
         </AnimatePresence>
         
         {/* Navigation dots */}
-        <div className="fixed right-8 top-1/2 -translate-y-1/2 flex flex-col space-y-4">
+        <div className="fixed right-8 top-1/2 -translate-y-1/2 flex flex-col space-y-4 z-50">
           {['hero', 'about', 'services', 'testimonials', 'cta', 'contact'].map((section) => (
             <button
               key={section}
               onClick={() => goToSection(section as SectionType)}
               className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                activeSection === section ? 'bg-primary scale-125' : 'bg-gray-500'
+                activeSection === section ? 'bg-primary scale-125' : 'bg-gray-300'
               }`}
               aria-label={`Go to ${section} section`}
             />

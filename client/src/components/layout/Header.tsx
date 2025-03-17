@@ -19,7 +19,7 @@ export function Header({ activeSection = 'hero', onNavigate }: HeaderProps) {
   // Check if we're on the admin page
   const isAdminPage = location === '/admin';
 
-  // Function to navigate to sections in the new Apple-style fixed layout
+  // Function to navigate to sections in the Apple-style fixed layout
   const navigateToSection = (section: SectionType) => {
     if (onNavigate) {
       onNavigate(section);
@@ -29,15 +29,15 @@ export function Header({ activeSection = 'hero', onNavigate }: HeaderProps) {
 
   if (isAdminPage) {
     return (
-      <header className="fixed w-full top-0 z-50 bg-black border-b border-zinc-800 shadow-lg">
+      <header className="fixed w-full top-0 z-50 bg-white border-b border-gray-200 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            <Link href="/" className="text-2xl font-bold text-white flex items-center">
+            <Link href="/" className="text-2xl font-bold text-black flex items-center">
               <span className="text-primary mr-1">Ex</span>Work<span className="text-primary">.</span>
               <span className="text-sm">eu</span>
             </Link>
             <Link href="/admin">
-              <Button className="bg-zinc-800 text-white hover:bg-zinc-700 flex items-center gap-2">
+              <Button className="bg-gray-100 text-black hover:bg-gray-200 flex items-center gap-2 font-semibold">
                 <User className="h-4 w-4" />
                 Admin Dashboard
               </Button>
@@ -50,14 +50,14 @@ export function Header({ activeSection = 'hero', onNavigate }: HeaderProps) {
 
   return (
     <header className="fixed w-full top-0 z-50 transition-all duration-300">
-      <div className="bg-black bg-opacity-95 backdrop-blur-lg">
+      <div className="bg-white bg-opacity-95 backdrop-blur-lg border-b border-gray-100 shadow-sm">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
             {/* Logo */}
             <div className="flex items-center">
               <button 
                 onClick={() => navigateToSection('hero')}
-                className="text-3xl font-bold text-white flex items-center tracking-tight"
+                className="text-3xl font-bold text-black flex items-center tracking-tight"
               >
                 <span className="text-primary mr-1">Ex</span>Work<span className="text-primary">.</span>
                 <span className="text-sm">eu</span>
@@ -68,26 +68,26 @@ export function Header({ activeSection = 'hero', onNavigate }: HeaderProps) {
             <nav className="hidden md:flex space-x-10">
               <button 
                 onClick={() => navigateToSection('about')} 
-                className={`${activeSection === 'about' ? 'text-primary font-semibold' : 'text-gray-300'} hover:text-primary text-sm transition duration-150`}
+                className={`${activeSection === 'about' ? 'text-primary font-bold' : 'text-gray-700 font-medium'} hover:text-primary text-sm transition duration-150`}
               >
                 About
               </button>
               <button 
                 onClick={() => navigateToSection('services')} 
-                className={`${activeSection === 'services' ? 'text-primary font-semibold' : 'text-gray-300'} hover:text-primary text-sm transition duration-150`}
+                className={`${activeSection === 'services' ? 'text-primary font-bold' : 'text-gray-700 font-medium'} hover:text-primary text-sm transition duration-150`}
               >
                 Services
               </button>
               <button 
                 onClick={() => navigateToSection('testimonials')} 
-                className={`${activeSection === 'testimonials' ? 'text-primary font-semibold' : 'text-gray-300'} hover:text-primary text-sm transition duration-150`}
+                className={`${activeSection === 'testimonials' ? 'text-primary font-bold' : 'text-gray-700 font-medium'} hover:text-primary text-sm transition duration-150`}
               >
                 Testimonials
               </button>
               <Link href="/admin">
                 <Button 
                   variant="outline"
-                  className="text-white border-zinc-700 hover:bg-zinc-800"
+                  className="text-black border-gray-300 hover:bg-gray-100 font-medium"
                 >
                   <User className="h-4 w-4 mr-2" />
                   Admin
@@ -95,7 +95,7 @@ export function Header({ activeSection = 'hero', onNavigate }: HeaderProps) {
               </Link>
               <Button 
                 onClick={() => navigateToSection('contact')} 
-                className="apple-button"
+                className="bg-primary hover:bg-primary/90 text-white font-bold"
               >
                 Contact Us
               </Button>
@@ -106,7 +106,7 @@ export function Header({ activeSection = 'hero', onNavigate }: HeaderProps) {
               <Button 
                 variant="ghost" 
                 size="icon" 
-                className="rounded-full bg-zinc-800/50 text-white hover:bg-zinc-700"
+                className="rounded-full bg-gray-100 text-black hover:bg-gray-200"
                 onClick={() => {
                   const sectionOrder: SectionType[] = ['hero', 'about', 'services', 'testimonials', 'cta', 'contact'];
                   const currentIndex = sectionOrder.indexOf(activeSection);
@@ -120,7 +120,7 @@ export function Header({ activeSection = 'hero', onNavigate }: HeaderProps) {
               <Button 
                 variant="ghost" 
                 size="icon" 
-                className="rounded-full bg-zinc-800/50 text-white hover:bg-zinc-700"
+                className="rounded-full bg-gray-100 text-black hover:bg-gray-200"
                 onClick={() => {
                   const sectionOrder: SectionType[] = ['hero', 'about', 'services', 'testimonials', 'cta', 'contact'];
                   const currentIndex = sectionOrder.indexOf(activeSection);
@@ -139,7 +139,7 @@ export function Header({ activeSection = 'hero', onNavigate }: HeaderProps) {
                 <Button 
                   variant="outline"
                   size="sm"
-                  className="text-white border-zinc-700 hover:bg-zinc-800"
+                  className="text-black border-gray-300 hover:bg-gray-100"
                 >
                   <User className="h-4 w-4" />
                 </Button>
@@ -147,7 +147,7 @@ export function Header({ activeSection = 'hero', onNavigate }: HeaderProps) {
               <Button 
                 variant="ghost" 
                 size="icon" 
-                className="text-white"
+                className="text-black"
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 aria-label="Toggle menu"
               >
@@ -164,7 +164,7 @@ export function Header({ activeSection = 'hero', onNavigate }: HeaderProps) {
 
       {/* Mobile menu */}
       <motion.div 
-        className={`md:hidden bg-black/95 shadow-lg absolute w-full backdrop-blur-lg`}
+        className={`md:hidden bg-white shadow-lg absolute w-full backdrop-blur-lg`}
         initial={false}
         animate={{ 
           height: isMobileMenuOpen ? 'auto' : 0,
@@ -176,31 +176,31 @@ export function Header({ activeSection = 'hero', onNavigate }: HeaderProps) {
         <div className="px-6 py-4 space-y-2">
           <button 
             onClick={() => navigateToSection('hero')} 
-            className={`block w-full text-left px-4 py-3 rounded-md text-base font-medium ${activeSection === 'hero' ? 'text-primary' : 'text-gray-300'} hover:text-primary hover:bg-zinc-800/50 transition duration-150`}
+            className={`block w-full text-left px-4 py-3 rounded-md text-base font-bold ${activeSection === 'hero' ? 'text-primary' : 'text-gray-800'} hover:text-primary hover:bg-gray-100 transition duration-150`}
           >
             Home
           </button>
           <button 
             onClick={() => navigateToSection('about')} 
-            className={`block w-full text-left px-4 py-3 rounded-md text-base font-medium ${activeSection === 'about' ? 'text-primary' : 'text-gray-300'} hover:text-primary hover:bg-zinc-800/50 transition duration-150`}
+            className={`block w-full text-left px-4 py-3 rounded-md text-base font-bold ${activeSection === 'about' ? 'text-primary' : 'text-gray-800'} hover:text-primary hover:bg-gray-100 transition duration-150`}
           >
             About
           </button>
           <button 
             onClick={() => navigateToSection('services')} 
-            className={`block w-full text-left px-4 py-3 rounded-md text-base font-medium ${activeSection === 'services' ? 'text-primary' : 'text-gray-300'} hover:text-primary hover:bg-zinc-800/50 transition duration-150`}
+            className={`block w-full text-left px-4 py-3 rounded-md text-base font-bold ${activeSection === 'services' ? 'text-primary' : 'text-gray-800'} hover:text-primary hover:bg-gray-100 transition duration-150`}
           >
             Services
           </button>
           <button 
             onClick={() => navigateToSection('testimonials')} 
-            className={`block w-full text-left px-4 py-3 rounded-md text-base font-medium ${activeSection === 'testimonials' ? 'text-primary' : 'text-gray-300'} hover:text-primary hover:bg-zinc-800/50 transition duration-150`}
+            className={`block w-full text-left px-4 py-3 rounded-md text-base font-bold ${activeSection === 'testimonials' ? 'text-primary' : 'text-gray-800'} hover:text-primary hover:bg-gray-100 transition duration-150`}
           >
             Testimonials
           </button>
           <button 
             onClick={() => navigateToSection('contact')} 
-            className="block w-full text-left px-4 py-3 rounded-full text-base font-medium bg-primary text-white hover:bg-primary/90 transition duration-150"
+            className="block w-full text-left px-4 py-3 rounded-md text-base font-bold bg-primary text-white hover:bg-primary/90 transition duration-150"
           >
             Contact Us
           </button>

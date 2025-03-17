@@ -33,7 +33,7 @@ export function HeroSection({ onNext }: HeroSectionProps) {
   };
 
   return (
-    <section className="h-full w-full flex items-center bg-black text-white">
+    <section className="h-full w-full flex items-center bg-white text-black">
       <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full py-8">
         <motion.div 
           className="grid md:grid-cols-2 gap-12 items-center"
@@ -43,14 +43,14 @@ export function HeroSection({ onNext }: HeroSectionProps) {
         >
           <div>
             <motion.h1 
-              className="text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight tracking-tight mb-6"
+              className="text-5xl md:text-6xl lg:text-7xl font-extrabold text-black leading-tight tracking-tight mb-6"
               variants={itemVariants}
             >
               Software solutions that <span className="text-primary">empower</span> <br/>your business
             </motion.h1>
             
             <motion.p 
-              className="text-xl text-gray-300 mb-8 max-w-xl leading-relaxed"
+              className="text-xl text-gray-700 mb-8 max-w-xl leading-relaxed font-medium"
               variants={itemVariants}
             >
               {COMPANY_DESCRIPTION}
@@ -62,22 +62,19 @@ export function HeroSection({ onNext }: HeroSectionProps) {
             >
               <Button 
                 onClick={onNext}
-                className="apple-button text-base"
+                className="bg-primary hover:bg-primary/90 text-white font-bold text-base"
                 size="lg"
               >
                 Explore Our Services
               </Button>
               <Button 
                 onClick={() => {
-                  // Navigate directly to contact
                   if (onNext) {
-                    // This is a simplified approach, in a real implementation 
-                    // you would want to navigate directly to the contact section
                     onNext();
                   }
                 }}
                 variant="outline"
-                className="bg-transparent hover:bg-zinc-800 text-white py-3 px-6 border border-zinc-700 text-base"
+                className="hover:bg-gray-100 text-black py-3 px-6 border border-gray-300 text-base font-medium"
                 size="lg"
               >
                 Contact Us
@@ -90,7 +87,7 @@ export function HeroSection({ onNext }: HeroSectionProps) {
             className="hidden md:block"
           >
             <motion.div 
-              className="relative h-[500px] w-full rounded-2xl overflow-hidden shadow-2xl"
+              className="relative h-[500px] w-full rounded-xl overflow-hidden shadow-lg border border-gray-100"
               whileHover={{ scale: 1.02 }}
               transition={{ duration: 0.5 }}
             >
@@ -99,7 +96,7 @@ export function HeroSection({ onNext }: HeroSectionProps) {
                 alt="Modern software solutions for businesses" 
                 className="h-full w-full object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
+              <div className="absolute inset-0 bg-white/20"></div>
             </motion.div>
           </motion.div>
         </motion.div>
@@ -114,7 +111,7 @@ export function HeroSection({ onNext }: HeroSectionProps) {
           <Button
             variant="ghost"
             size="icon"
-            className="rounded-full bg-zinc-800/30 text-white hover:bg-zinc-700/50 h-12 w-12"
+            className="rounded-full bg-gray-100 text-black hover:bg-gray-200 h-12 w-12 shadow-md"
             onClick={onNext}
           >
             <ArrowDown className="h-5 w-5 animate-bounce" />

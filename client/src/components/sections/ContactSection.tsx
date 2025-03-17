@@ -102,7 +102,7 @@ export function ContactSection() {
   };
 
   return (
-    <section className="h-full w-full flex items-center bg-black text-white overflow-y-auto">
+    <section className="h-full w-full flex items-center bg-white text-black overflow-y-auto">
       <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full py-6">
         <motion.div
           className="flex flex-col"
@@ -111,58 +111,58 @@ export function ContactSection() {
           variants={containerVariants}
         >
           <motion.div className="text-center mb-12" variants={itemVariants}>
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4 tracking-tight">Get in Touch</h2>
+            <h2 className="text-4xl md:text-5xl font-bold text-black mb-4 tracking-tight">Get in Touch</h2>
             <div className="w-24 h-1 bg-primary mx-auto mb-8"></div>
-            <p className="max-w-3xl mx-auto text-xl text-gray-300">
+            <p className="max-w-3xl mx-auto text-xl text-gray-700 font-medium">
               Have questions or ready to start a project? Fill out the form below and we'll get back to you promptly.
             </p>
           </motion.div>
 
           <div className="grid md:grid-cols-2 gap-12 items-start">
             <motion.div variants={itemVariants}>
-              <div className="bg-zinc-900 rounded-xl p-8 border border-zinc-800 shadow-lg">
-                <h3 className="text-2xl font-bold mb-6 text-white">Contact Information</h3>
+              <div className="bg-gray-50 rounded-xl p-8 border border-gray-100 shadow-md">
+                <h3 className="text-2xl font-bold mb-6 text-black">Contact Information</h3>
                 
                 <div className="space-y-8">
                   <div className="flex items-start">
-                    <div className="bg-zinc-800 p-3 rounded-full mr-4">
+                    <div className="bg-white p-3 rounded-full mr-4 shadow-sm border border-gray-100">
                       <MapPin className="h-6 w-6 text-primary" />
                     </div>
                     <div>
-                      <h4 className="font-semibold text-lg text-white">Address</h4>
-                      <p className="text-gray-300">{details.address}</p>
+                      <h4 className="font-bold text-lg text-black">Address</h4>
+                      <p className="text-gray-700 font-medium">{details.address}</p>
                     </div>
                   </div>
                   
                   <div className="flex items-start">
-                    <div className="bg-zinc-800 p-3 rounded-full mr-4">
+                    <div className="bg-white p-3 rounded-full mr-4 shadow-sm border border-gray-100">
                       <Mail className="h-6 w-6 text-primary" />
                     </div>
                     <div>
-                      <h4 className="font-semibold text-lg text-white">Email</h4>
-                      <p className="text-gray-300">{details.email}</p>
+                      <h4 className="font-bold text-lg text-black">Email</h4>
+                      <p className="text-gray-700 font-medium">{details.email}</p>
                     </div>
                   </div>
                   
                   <div className="flex items-start">
-                    <div className="bg-zinc-800 p-3 rounded-full mr-4">
+                    <div className="bg-white p-3 rounded-full mr-4 shadow-sm border border-gray-100">
                       <Phone className="h-6 w-6 text-primary" />
                     </div>
                     <div>
-                      <h4 className="font-semibold text-lg text-white">Phone</h4>
-                      <p className="text-gray-300">{details.phone}</p>
+                      <h4 className="font-bold text-lg text-black">Phone</h4>
+                      <p className="text-gray-700 font-medium">{details.phone}</p>
                     </div>
                   </div>
                 </div>
                 
                 <div className="mt-10">
-                  <h3 className="text-xl font-bold mb-4 text-white">Follow Us</h3>
+                  <h3 className="text-xl font-bold mb-4 text-black">Follow Us</h3>
                   <div className="flex space-x-4">
                     <motion.a 
                       href={details.socialLinks?.[0] || "#"} 
                       target="_blank" 
                       rel="noopener noreferrer" 
-                      className="bg-zinc-800 p-3 rounded-full hover:bg-primary hover:text-white transition duration-300"
+                      className="bg-white p-3 rounded-full hover:bg-primary hover:text-white transition duration-300 shadow-sm border border-gray-100"
                       whileHover={{ scale: 1.1, rotate: 5 }}
                       whileTap={{ scale: 0.95 }}
                     >
@@ -172,7 +172,7 @@ export function ContactSection() {
                       href={details.socialLinks?.[1] || "#"} 
                       target="_blank" 
                       rel="noopener noreferrer" 
-                      className="bg-zinc-800 p-3 rounded-full hover:bg-primary hover:text-white transition duration-300"
+                      className="bg-white p-3 rounded-full hover:bg-primary hover:text-white transition duration-300 shadow-sm border border-gray-100"
                       whileHover={{ scale: 1.1, rotate: 5 }}
                       whileTap={{ scale: 0.95 }}
                     >
@@ -182,7 +182,7 @@ export function ContactSection() {
                       href={details.socialLinks?.[2] || "#"} 
                       target="_blank" 
                       rel="noopener noreferrer" 
-                      className="bg-zinc-800 p-3 rounded-full hover:bg-primary hover:text-white transition duration-300"
+                      className="bg-white p-3 rounded-full hover:bg-primary hover:text-white transition duration-300 shadow-sm border border-gray-100"
                       whileHover={{ scale: 1.1, rotate: 5 }}
                       whileTap={{ scale: 0.95 }}
                     >
@@ -192,7 +192,7 @@ export function ContactSection() {
                       href={details.socialLinks?.[3] || "#"} 
                       target="_blank" 
                       rel="noopener noreferrer" 
-                      className="bg-zinc-800 p-3 rounded-full hover:bg-primary hover:text-white transition duration-300"
+                      className="bg-white p-3 rounded-full hover:bg-primary hover:text-white transition duration-300 shadow-sm border border-gray-100"
                       whileHover={{ scale: 1.1, rotate: 5 }}
                       whileTap={{ scale: 0.95 }}
                     >
@@ -204,7 +204,7 @@ export function ContactSection() {
             </motion.div>
 
             <motion.div variants={itemVariants}>
-              <div className="bg-zinc-900 rounded-xl shadow-lg p-8 border border-zinc-800">
+              <div className="bg-white rounded-xl shadow-md p-8 border border-gray-100">
                 <Form {...form}>
                   <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                     <FormField
@@ -212,12 +212,12 @@ export function ContactSection() {
                       name="name"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-white">Full Name</FormLabel>
+                          <FormLabel className="text-black font-bold">Full Name</FormLabel>
                           <FormControl>
                             <Input 
                               placeholder="Your name" 
                               {...field} 
-                              className="bg-zinc-800 border-zinc-700 text-white"
+                              className="border-gray-300 text-black font-medium"
                             />
                           </FormControl>
                           <FormMessage />
@@ -230,13 +230,13 @@ export function ContactSection() {
                       name="email"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-white">Email Address</FormLabel>
+                          <FormLabel className="text-black font-bold">Email Address</FormLabel>
                           <FormControl>
                             <Input 
                               placeholder="your.email@example.com" 
                               type="email" 
                               {...field} 
-                              className="bg-zinc-800 border-zinc-700 text-white"
+                              className="border-gray-300 text-black font-medium"
                             />
                           </FormControl>
                           <FormMessage />
@@ -249,13 +249,13 @@ export function ContactSection() {
                       name="phone"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-white">Phone Number</FormLabel>
+                          <FormLabel className="text-black font-bold">Phone Number</FormLabel>
                           <FormControl>
                             <Input 
                               placeholder="+1 (123) 456-7890" 
                               type="tel" 
                               {...field} 
-                              className="bg-zinc-800 border-zinc-700 text-white"
+                              className="border-gray-300 text-black font-medium"
                             />
                           </FormControl>
                           <FormMessage />
@@ -268,17 +268,17 @@ export function ContactSection() {
                       name="service"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-white">Service Interested In</FormLabel>
+                          <FormLabel className="text-black font-bold">Service Interested In</FormLabel>
                           <Select 
                             onValueChange={field.onChange} 
                             defaultValue={field.value}
                           >
                             <FormControl>
-                              <SelectTrigger className="bg-zinc-800 border-zinc-700 text-white">
+                              <SelectTrigger className="border-gray-300 text-black font-medium">
                                 <SelectValue placeholder="Select a service" />
                               </SelectTrigger>
                             </FormControl>
-                            <SelectContent className="bg-zinc-800 border-zinc-700 text-white">
+                            <SelectContent>
                               <SelectItem value="software-development">Software Development</SelectItem>
                               <SelectItem value="it-support">IT Support & Consulting</SelectItem>
                               <SelectItem value="data-management">Data Management</SelectItem>
@@ -296,11 +296,11 @@ export function ContactSection() {
                       name="message"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-white">Your Message</FormLabel>
+                          <FormLabel className="text-black font-bold">Your Message</FormLabel>
                           <FormControl>
                             <Textarea 
                               placeholder="Tell us about your project or inquiry..." 
-                              className="resize-none min-h-[120px] bg-zinc-800 border-zinc-700 text-white"
+                              className="resize-none min-h-[120px] border-gray-300 text-black font-medium"
                               {...field} 
                             />
                           </FormControl>
@@ -315,7 +315,7 @@ export function ContactSection() {
                     >
                       <Button 
                         type="submit" 
-                        className="w-full bg-primary hover:bg-primary/90 text-white font-medium py-4 px-6 rounded-lg flex items-center justify-center"
+                        className="w-full bg-primary hover:bg-primary/90 text-white font-bold py-4 px-6 rounded-lg flex items-center justify-center"
                         disabled={isSubmitting}
                       >
                         <Send className="mr-2 h-5 w-5" />
