@@ -51,7 +51,7 @@ export function AboutSection() {
   };
 
   return (
-    <section className="h-full w-full flex items-center bg-black text-white">
+    <section className="h-full w-full flex items-center bg-white text-black">
       <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full">
         <motion.div 
           className="flex flex-col items-center"
@@ -60,9 +60,9 @@ export function AboutSection() {
           variants={containerVariants}
         >
           <motion.div className="text-center mb-16" variants={itemVariants}>
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4 tracking-tight">About ExWork</h2>
+            <h2 className="text-4xl md:text-5xl font-extrabold text-black mb-4 tracking-tight">About ExWork</h2>
             <div className="w-24 h-1 bg-primary mx-auto mb-8"></div>
-            <p className="max-w-3xl mx-auto text-xl text-gray-300">
+            <p className="max-w-3xl mx-auto text-xl text-gray-700 font-medium">
               We specialize in delivering cutting-edge software solutions and reliable technical support 
               to help you navigate the digital landscape with confidence.
             </p>
@@ -79,14 +79,14 @@ export function AboutSection() {
                 className="h-full"
               >
                 <motion.div 
-                  className="bg-zinc-900 rounded-xl p-8 h-full shadow-lg border border-zinc-800 transition-all duration-300"
-                  whileHover={{ y: -8, backgroundColor: "#1c1c1c" }}
+                  className="bg-white rounded-xl p-8 h-full shadow-md border border-gray-100 transition-all duration-300"
+                  whileHover={{ y: -8, boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)" }}
                 >
-                  <div className="bg-zinc-800 w-20 h-20 flex items-center justify-center rounded-full mb-6">
+                  <div className="bg-gray-50 w-20 h-20 flex items-center justify-center rounded-full mb-6 shadow-sm border border-gray-100">
                     {getIcon(feature.icon)}
                   </div>
-                  <h3 className="text-2xl font-bold mb-4 text-white">{feature.title}</h3>
-                  <p className="text-gray-300 text-lg">
+                  <h3 className="text-2xl font-bold mb-4 text-black">{feature.title}</h3>
+                  <p className="text-gray-700 text-lg font-medium">
                     {feature.description}
                   </p>
                 </motion.div>
