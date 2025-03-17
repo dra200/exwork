@@ -1,14 +1,14 @@
-import { RevealAnimation } from "@/components/animations/RevealAnimation";
 import { useQuery } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { contactFormSchema, ContactFormData } from "@shared/schema";
-import { queryClient, apiRequest } from "@/lib/queryClient";
+import { apiRequest } from "@/lib/queryClient";
 import { DEFAULT_COMPANY_DETAILS } from "@/lib/constants";
 import { useToast } from "@/hooks/use-toast";
 import { CompanyDetails } from "@shared/schema";
 import { useState } from "react";
-import { MapPin, Mail, Phone, Linkedin, Twitter, Facebook, Instagram } from "lucide-react";
+import { motion } from "framer-motion";
+import { MapPin, Mail, Phone, Linkedin, Twitter, Facebook, Instagram, Send } from "lucide-react";
 import {
   Form,
   FormControl,
@@ -77,198 +77,257 @@ export function ContactSection() {
     }
   };
 
+  // Animation variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.2,
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5,
+        ease: [0.22, 1, 0.36, 1]
+      }
+    }
+  };
+
   return (
-    <section id="contact" className="py-20 md:py-28 scroll-mt-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <RevealAnimation className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-[#1D1D1F] mb-4">Get in Touch</h2>
-          <div className="w-24 h-1 bg-[#FF6B00] mx-auto mb-8"></div>
-          <p className="max-w-3xl mx-auto text-lg text-secondary">
-            Have questions or ready to start a project? Fill out the form below and we'll get back to you promptly.
-          </p>
-        </RevealAnimation>
+    <section className="h-full w-full flex items-center bg-black text-white overflow-y-auto">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full py-6">
+        <motion.div
+          className="flex flex-col"
+          initial="hidden"
+          animate="visible"
+          variants={containerVariants}
+        >
+          <motion.div className="text-center mb-12" variants={itemVariants}>
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4 tracking-tight">Get in Touch</h2>
+            <div className="w-24 h-1 bg-primary mx-auto mb-8"></div>
+            <p className="max-w-3xl mx-auto text-xl text-gray-300">
+              Have questions or ready to start a project? Fill out the form below and we'll get back to you promptly.
+            </p>
+          </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-12 items-start">
-          <RevealAnimation>
-            <div className="bg-[#F5F5F7] rounded-xl p-8">
-              <h3 className="text-2xl font-bold mb-6">Contact Information</h3>
-              
-              <div className="space-y-6">
-                <div className="flex items-start">
-                  <div className="bg-white p-3 rounded-full mr-4 shadow-sm">
-                    <MapPin className="h-6 w-6 text-primary" />
+          <div className="grid md:grid-cols-2 gap-12 items-start">
+            <motion.div variants={itemVariants}>
+              <div className="bg-zinc-900 rounded-xl p-8 border border-zinc-800 shadow-lg">
+                <h3 className="text-2xl font-bold mb-6 text-white">Contact Information</h3>
+                
+                <div className="space-y-8">
+                  <div className="flex items-start">
+                    <div className="bg-zinc-800 p-3 rounded-full mr-4">
+                      <MapPin className="h-6 w-6 text-primary" />
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-lg text-white">Address</h4>
+                      <p className="text-gray-300">{details.address}</p>
+                    </div>
                   </div>
-                  <div>
-                    <h4 className="font-semibold text-lg">Address</h4>
-                    <p className="text-secondary">{details.address}</p>
+                  
+                  <div className="flex items-start">
+                    <div className="bg-zinc-800 p-3 rounded-full mr-4">
+                      <Mail className="h-6 w-6 text-primary" />
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-lg text-white">Email</h4>
+                      <p className="text-gray-300">{details.email}</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start">
+                    <div className="bg-zinc-800 p-3 rounded-full mr-4">
+                      <Phone className="h-6 w-6 text-primary" />
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-lg text-white">Phone</h4>
+                      <p className="text-gray-300">{details.phone}</p>
+                    </div>
                   </div>
                 </div>
                 
-                <div className="flex items-start">
-                  <div className="bg-white p-3 rounded-full mr-4 shadow-sm">
-                    <Mail className="h-6 w-6 text-primary" />
+                <div className="mt-10">
+                  <h3 className="text-xl font-bold mb-4 text-white">Follow Us</h3>
+                  <div className="flex space-x-4">
+                    <motion.a 
+                      href={details.socialLinks?.[0] || "#"} 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="bg-zinc-800 p-3 rounded-full hover:bg-primary hover:text-white transition duration-300"
+                      whileHover={{ scale: 1.1, rotate: 5 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <Linkedin className="h-5 w-5" />
+                    </motion.a>
+                    <motion.a 
+                      href={details.socialLinks?.[1] || "#"} 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="bg-zinc-800 p-3 rounded-full hover:bg-primary hover:text-white transition duration-300"
+                      whileHover={{ scale: 1.1, rotate: 5 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <Twitter className="h-5 w-5" />
+                    </motion.a>
+                    <motion.a 
+                      href={details.socialLinks?.[2] || "#"} 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="bg-zinc-800 p-3 rounded-full hover:bg-primary hover:text-white transition duration-300"
+                      whileHover={{ scale: 1.1, rotate: 5 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <Facebook className="h-5 w-5" />
+                    </motion.a>
+                    <motion.a 
+                      href={details.socialLinks?.[3] || "#"} 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="bg-zinc-800 p-3 rounded-full hover:bg-primary hover:text-white transition duration-300"
+                      whileHover={{ scale: 1.1, rotate: 5 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <Instagram className="h-5 w-5" />
+                    </motion.a>
                   </div>
-                  <div>
-                    <h4 className="font-semibold text-lg">Email</h4>
-                    <p className="text-secondary">{details.email}</p>
-                  </div>
-                </div>
-                
-                <div className="flex items-start">
-                  <div className="bg-white p-3 rounded-full mr-4 shadow-sm">
-                    <Phone className="h-6 w-6 text-primary" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-lg">Phone</h4>
-                    <p className="text-secondary">{details.phone}</p>
-                  </div>
-                </div>
-              </div>
-              
-              <div className="mt-8">
-                <h3 className="text-xl font-bold mb-4">Follow Us</h3>
-                <div className="flex space-x-4">
-                  <a 
-                    href={details.socialLinks?.[0] || "#"} 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    className="bg-white p-3 rounded-full shadow-sm hover:bg-primary hover:text-white transition duration-150"
-                  >
-                    <Linkedin className="h-5 w-5" />
-                  </a>
-                  <a 
-                    href={details.socialLinks?.[1] || "#"} 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    className="bg-white p-3 rounded-full shadow-sm hover:bg-primary hover:text-white transition duration-150"
-                  >
-                    <Twitter className="h-5 w-5" />
-                  </a>
-                  <a 
-                    href={details.socialLinks?.[2] || "#"} 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    className="bg-white p-3 rounded-full shadow-sm hover:bg-primary hover:text-white transition duration-150"
-                  >
-                    <Facebook className="h-5 w-5" />
-                  </a>
-                  <a 
-                    href={details.socialLinks?.[3] || "#"} 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    className="bg-white p-3 rounded-full shadow-sm hover:bg-primary hover:text-white transition duration-150"
-                  >
-                    <Instagram className="h-5 w-5" />
-                  </a>
                 </div>
               </div>
-            </div>
-          </RevealAnimation>
+            </motion.div>
 
-          <RevealAnimation delay={0.2}>
-            <div className="bg-white rounded-xl shadow-lg p-8">
-              <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-                  <FormField
-                    control={form.control}
-                    name="name"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Full Name</FormLabel>
-                        <FormControl>
-                          <Input placeholder="Your name" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  
-                  <FormField
-                    control={form.control}
-                    name="email"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Email Address</FormLabel>
-                        <FormControl>
-                          <Input placeholder="your.email@example.com" type="email" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  
-                  <FormField
-                    control={form.control}
-                    name="phone"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Phone Number</FormLabel>
-                        <FormControl>
-                          <Input placeholder="+1 (123) 456-7890" type="tel" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  
-                  <FormField
-                    control={form.control}
-                    name="service"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Service Interested In</FormLabel>
-                        <Select 
-                          onValueChange={field.onChange} 
-                          defaultValue={field.value}
-                        >
+            <motion.div variants={itemVariants}>
+              <div className="bg-zinc-900 rounded-xl shadow-lg p-8 border border-zinc-800">
+                <Form {...form}>
+                  <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                    <FormField
+                      control={form.control}
+                      name="name"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-white">Full Name</FormLabel>
                           <FormControl>
-                            <SelectTrigger>
-                              <SelectValue placeholder="Select a service" />
-                            </SelectTrigger>
+                            <Input 
+                              placeholder="Your name" 
+                              {...field} 
+                              className="bg-zinc-800 border-zinc-700 text-white"
+                            />
                           </FormControl>
-                          <SelectContent>
-                            <SelectItem value="software-development">Software Development</SelectItem>
-                            <SelectItem value="it-support">IT Support & Consulting</SelectItem>
-                            <SelectItem value="data-management">Data Management</SelectItem>
-                            <SelectItem value="cybersecurity">Cybersecurity</SelectItem>
-                            <SelectItem value="other">Other</SelectItem>
-                          </SelectContent>
-                        </Select>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  
-                  <FormField
-                    control={form.control}
-                    name="message"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Your Message</FormLabel>
-                        <FormControl>
-                          <Textarea 
-                            placeholder="Tell us about your project or inquiry..." 
-                            className="resize-none min-h-[120px]"
-                            {...field} 
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  
-                  <Button 
-                    type="submit" 
-                    className="w-full bg-primary hover:bg-primary/90 text-white font-medium py-3 px-6"
-                    disabled={isSubmitting}
-                  >
-                    {isSubmitting ? "Sending..." : "Send Message"}
-                  </Button>
-                </form>
-              </Form>
-            </div>
-          </RevealAnimation>
-        </div>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    
+                    <FormField
+                      control={form.control}
+                      name="email"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-white">Email Address</FormLabel>
+                          <FormControl>
+                            <Input 
+                              placeholder="your.email@example.com" 
+                              type="email" 
+                              {...field} 
+                              className="bg-zinc-800 border-zinc-700 text-white"
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    
+                    <FormField
+                      control={form.control}
+                      name="phone"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-white">Phone Number</FormLabel>
+                          <FormControl>
+                            <Input 
+                              placeholder="+1 (123) 456-7890" 
+                              type="tel" 
+                              {...field} 
+                              className="bg-zinc-800 border-zinc-700 text-white"
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    
+                    <FormField
+                      control={form.control}
+                      name="service"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-white">Service Interested In</FormLabel>
+                          <Select 
+                            onValueChange={field.onChange} 
+                            defaultValue={field.value}
+                          >
+                            <FormControl>
+                              <SelectTrigger className="bg-zinc-800 border-zinc-700 text-white">
+                                <SelectValue placeholder="Select a service" />
+                              </SelectTrigger>
+                            </FormControl>
+                            <SelectContent className="bg-zinc-800 border-zinc-700 text-white">
+                              <SelectItem value="software-development">Software Development</SelectItem>
+                              <SelectItem value="it-support">IT Support & Consulting</SelectItem>
+                              <SelectItem value="data-management">Data Management</SelectItem>
+                              <SelectItem value="cybersecurity">Cybersecurity</SelectItem>
+                              <SelectItem value="other">Other</SelectItem>
+                            </SelectContent>
+                          </Select>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    
+                    <FormField
+                      control={form.control}
+                      name="message"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-white">Your Message</FormLabel>
+                          <FormControl>
+                            <Textarea 
+                              placeholder="Tell us about your project or inquiry..." 
+                              className="resize-none min-h-[120px] bg-zinc-800 border-zinc-700 text-white"
+                              {...field} 
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    
+                    <motion.div
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                    >
+                      <Button 
+                        type="submit" 
+                        className="w-full bg-primary hover:bg-primary/90 text-white font-medium py-4 px-6 rounded-lg flex items-center justify-center"
+                        disabled={isSubmitting}
+                      >
+                        <Send className="mr-2 h-5 w-5" />
+                        {isSubmitting ? "Sending..." : "Send Message"}
+                      </Button>
+                    </motion.div>
+                  </form>
+                </Form>
+              </div>
+            </motion.div>
+          </div>
+        </motion.div>
       </div>
     </section>
   );
